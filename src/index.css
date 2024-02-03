@@ -1,0 +1,65 @@
+:root {
+  --main-color: #411E8F;
+  --primary-color: #7752FE; 
+  --secondary-color:#495e74 ;
+  --gray-color: #070013;
+  --dark-color: #2b0048;
+  --blue-color: #5700ca;
+  --green-color: #3795BD;
+  --green-sea-color: #16a085;
+  --pumpkin-color: #d35400;
+  --text-color: #464646;
+  --white-color: #fff;
+  --white-secondary-color: #e6e6e6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  background-color:  var(--dark-color);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Some Global Classes For icons */
+.bi-pencil-square {
+  color: var(--green-sea-color);
+  margin-right: 15px;
+}
+
+.bi-trash-fill {
+  color: var(--red-color);
+}
+
+/* Scrollbar Classes For Google Chrome */
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+   
+}
