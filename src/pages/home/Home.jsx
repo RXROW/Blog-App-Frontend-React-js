@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <Particales />
+      {/* <Particales /> */}
     <section className="home">
       <div className="home-hero-header">
         <div className="home-hero-header-layout">

@@ -3,15 +3,26 @@
   --primary-color: #7752FE; 
   --secondary-color:#495e74 ;
   --gray-color: #070013;
-  --dark-color: #2b0048;
+  --dark-color: #0c0021;
   --blue-color: #5700ca;
-  --green-color: #3795BD;
+  --green-color: #003842;
   --green-sea-color: #16a085;
-  --pumpkin-color: #d35400;
+  --pumpkin-color: #7000d3;
   --text-color: #464646;
   --white-color: #fff;
   --white-secondary-color: #e6e6e6;
 }
+/* Style Footer */
+footer{
+  color: var(--white-secondary-color);
+  font-size: 21px;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+
 
 * {
   box-sizing: border-box;
@@ -23,6 +34,7 @@
 body {
   background-color:  var(--dark-color);
   overflow-x: hidden;
+  color: #fff;
 }
 
 a {

@@ -6,7 +6,7 @@ const  Left = ({toggle , setToggle}) => {
     <div>
           <div className="header-left">
            
-        <div className="hader-logo">
+        <div className="header-logo">
           <strong>BLOG </strong>
         <i class="bi bi-pencil"></i>
         </div>
