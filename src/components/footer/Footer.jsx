@@ -8,8 +8,6 @@ const Footer = () => {
     </footer>
   );
 }
-const style={
  
-}
 
 export default Footer;

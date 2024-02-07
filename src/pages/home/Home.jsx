@@ -1,5 +1,5 @@
 import React from "react";
-  import Particales from "../../Particales";
+  // import Particales from "../../Particales";
 import './home.css'
 import PostList from "../../components/posts/PostList";
 import {posts ,categories} from '../../dummyData'

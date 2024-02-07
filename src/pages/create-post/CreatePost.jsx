@@ -13,11 +13,11 @@ const formSubmitHandler = (e)=>{
   if(category.trim() === "") return toast.error("Post Category is required"); 
   if(description.trim() === "") return  toast.error("Post Description is required"); 
   if(!file) return toast.error("Post Image is required"); 
-  const formData=new formData();
-  formData.append("image", file);
-  formData.append("title", title);
-  formData.append("description", description);
-  formData.append("category", category);
+  // const formData=new formData();
+  // formData.append("image", file);
+  // formData.append("title", title);
+  // formData.append("description", description);
+  // formData.append("category", category);
 
   /// @ TODO - send to server 
 
