@@ -5,12 +5,15 @@
   --gray-color: #070013;
   --dark-color: #0c0021;
   --blue-color: #5700ca;
-  --green-color: #003842;
+  --green-color: #0199b4;
   --green-sea-color: #16a085;
   --pumpkin-color: #7000d3;
+  --red-color: #d3005f;
+ 
   --text-color: #464646;
   --white-color: #fff;
   --white-secondary-color: #e6e6e6;
+  --text-blue-color: #e8f9ff;
 }
 /* Style Footer */
 footer{

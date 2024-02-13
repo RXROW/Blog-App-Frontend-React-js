@@ -7,6 +7,7 @@ import Posts from "./pages/post-page/Posts-page";
 import AdminDashbourd from "./pages/admin/AdminDashbourd";
 import CreatePost from "./pages/create-post/CreatePost";
 import Footer from "./components/footer/Footer";
+import PostDetails from "./pages/post-detalis/PostDetails";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/create-post" element={<CreatePost />} />
+          <Route path="/posts/details/:id" element={<PostDetails />} />
           <Route path="/admin-dashbourd" element={<AdminDashbourd />} />
         </Routes>
         <Footer/>
