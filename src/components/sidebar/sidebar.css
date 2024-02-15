@@ -3,7 +3,7 @@
   margin-left: 20px;
 }
 .sidebar-title{
-  color: var( --white-secondary-color);
+ color: var(  --dark-color);
   text-align: center;
   padding: 7px;
   font-size: 24px;
@@ -32,8 +32,9 @@
 
 }
 .sidebar-link:hover{
-  background-color: var(--white-secondary-color);
-  color: var(--blue-color);
+  background-color: var(--dark-color);
+ 
+  color: var(--white-secondary-color);
   transform: scale(.9);
 }
  /* Media Quries */

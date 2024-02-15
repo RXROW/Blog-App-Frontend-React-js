@@ -9,6 +9,7 @@
   --green-sea-color: #16a085;
   --pumpkin-color: #7000d3;
   --red-color: #d3005f;
+  --body-color: #f7f2ff;
  
   --text-color: #464646;
   --white-color: #fff;
@@ -35,7 +36,7 @@ footer{
 }
 
 body {
-  background-color:  var(--dark-color);
+ background-color: var(  --body-color);
   overflow-x: hidden;
   color: #fff;
 }

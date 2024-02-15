@@ -2,6 +2,7 @@
   width: 800px;
   margin: auto;
   padding: 20px;
+   
 }
 .post-details-image-wrapper {
   height: 400px;
@@ -11,6 +12,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+ 
 }
 .update-post-label {
   font-size: 14px;
@@ -43,7 +45,7 @@
 .post-details-title{
   text-align: center;
   font-size: 40px;
-  color: var(  --text-blue-color);
+  color: var(  --gray-color);
   text-transform: capitalize;
   margin: 15px  0;
 }
@@ -58,6 +60,7 @@
   height: 70px;
   border-radius: 50%;
   object-fit: cover;
+ 
 }
 .post-details-user{
   display: flex;
@@ -68,19 +71,20 @@
 }
 .post-details-user strong{
   font-size: 21px;
-  color: var(--white-secondary-color);
+  color: var(--text-color);
 
 }
 .post-details-user span{
   font-weight: 500;
   font-size: 14px;
-  color: var(--text-blue-color);
+  color: var(--text-color);
 
 }
 .post-details-description{
   font-size: 21px;
   line-height: 1.8;
-  color: var(--text-blue-color);
+  color: var(--text-color);
+ 
 }
 .post-detials-icon-wrapper{
   margin: 15px 0;
