@@ -8,11 +8,12 @@ import AdminDashbourd from "./pages/admin/AdminDashbourd";
 import CreatePost from "./pages/create-post/CreatePost";
 import Footer from "./components/footer/Footer";
 import PostDetails from "./pages/post-detalis/PostDetails";
-
+import {  ToastContainer  } from "react-toastify"; 
 export default function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ToastContainer theme="colored " position="top-center"/>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

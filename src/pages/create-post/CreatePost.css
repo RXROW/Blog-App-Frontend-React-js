@@ -9,7 +9,7 @@
 }
 .create-post-title{
   font-size: 30px;
-  color: var(--white-color);
+ color: var(--gray-color);
   text-transform: capitalize;
   margin-bottom: 20px;
 }

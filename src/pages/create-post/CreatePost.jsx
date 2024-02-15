@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./CreatePost.css";
-import {toast , ToastContainer} from "react-toastify"
+import {toast  } from "react-toastify"
 const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -29,7 +29,7 @@ const formSubmitHandler = (e)=>{
 
   return (
     <section className="create-post">
-      <ToastContainer/>
+ 
       <h1 className="create-post-title">Create New Post</h1>
       <form onSubmit={formSubmitHandler} className="create-post-form">
         <input

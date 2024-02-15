@@ -2,7 +2,10 @@ import { Link, useParams } from "react-router-dom";
 import { posts } from "../../dummyData";
 import './post-details.css';
 import { useEffect, useState } from "react";
- import { toast , ToastContainer  } from "react-toastify"; 
+ import { toast   } from "react-toastify"; 
+import AddComment from "../../components/comments/AddComment";
+import CommentList from "../../components/comments/CommentList";
+import Swal from 'sweetalert2'
 const PostDetails = () => {
   const [file ,setFile] =  useState(null)
   useEffect(()=>{
@@ -14,6 +17,26 @@ const uploadImageSubmitHandler = (e)=>{
   if(!file) return toast.warning("There is no file ! ")
   console.log("Image Upladed Successfully")
 }
+// Delete Post Handler 
+const deletePostHandler = ()=>{
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    }
+  });
+}
  
 
   const { id } = useParams();
@@ -21,7 +44,7 @@ const uploadImageSubmitHandler = (e)=>{
 
   return (
     <section className="post-details">
-      <ToastContainer theme="colored " position="top-center"/>
+
       <div className="post-details-image-wrapper">
         <img src= { file? URL.createObjectURL(file) :post.image} alt="" className="post-details-image" />
         <form onSubmit={uploadImageSubmitHandler} className="update-post-image-form">
@@ -39,6 +62,14 @@ const uploadImageSubmitHandler = (e)=>{
         </form>
       </div>
       <h1 className="post-details-title">{post.title}</h1>
+  
+      <p className="post-details-description">
+        {post.description}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
+        deserunt laborum, quos doloribus natus et corporis rem praesentium!
+        Doloribus dignissimos dolores ad esse eveniet molestias, numquam nisi
+        iste ut dolorem!
+      </p>
       <div className="post-details-user-info">
         <img src={post.user.image} alt="" className="post-details-user-image" />
         <div className="post-details-user">
@@ -48,13 +79,6 @@ const uploadImageSubmitHandler = (e)=>{
           <span>{post.createdAt}</span>
         </div>
       </div>
-      <p className="post-details-description">
-        {post.description}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi
-        deserunt laborum, quos doloribus natus et corporis rem praesentium!
-        Doloribus dignissimos dolores ad esse eveniet molestias, numquam nisi
-        iste ut dolorem!
-      </p>
       <div className="post-detials-icon-wrapper">
         <div>
           <i className="bi bi-hand-thumbs-up" ></i>
@@ -62,10 +86,12 @@ const uploadImageSubmitHandler = (e)=>{
         </div>
         <div>
           <i className="bi bi-pencil-square"></i>
-          <i className="bi bi-trash-fill"></i>
+          <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
         </div>
-
       </div>
+      <AddComment/>
+      <CommentList/>
+       
     </section>
   );
 };
