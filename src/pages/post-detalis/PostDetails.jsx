@@ -6,8 +6,10 @@ import { useEffect, useState } from "react";
 import AddComment from "../../components/comments/AddComment";
 import CommentList from "../../components/comments/CommentList";
 import Swal from 'sweetalert2'
+import UpdatePostModul from "./UpdatePostModul";
 const PostDetails = () => {
-  const [file ,setFile] =  useState(null)
+  const [file ,setFile] =  useState(null);
+  const [updatePost ,setUpdatePost] =  useState(false);
   useEffect(()=>{
   window.scrollTo(0,0)
   },[])
@@ -85,12 +87,13 @@ const deletePostHandler = ()=>{
           <small>{post.likes.length} likes</small>
         </div>
         <div>
-          <i className="bi bi-pencil-square"></i>
+          <i onClick={()=>setUpdatePost(true)} className="bi bi-pencil-square"></i>
           <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
         </div>
       </div>
       <AddComment/>
       <CommentList/>
+        {updatePost && <UpdatePostModul post={post} setUpdatePost={setUpdatePost}/> }    
        
     </section>
   );
