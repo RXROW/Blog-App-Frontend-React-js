@@ -43,7 +43,7 @@ const deletePostHandler = ()=>{
       <div className="profile-header">
         <div className="profile-image-warpper">
           <img src={file ? URL.createObjectURL(file):"/images/user-avatar.png"} 
-           alt="profile-image" 
+           alt="profile" 
            className="profile-image" />
            <form onSubmit={formSubmitHandler} >
             <abbr title='Choose Profile Photo'>
