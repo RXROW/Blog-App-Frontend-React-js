@@ -10,6 +10,7 @@ import Footer from "./components/footer/Footer";
 import PostDetails from "./pages/post-detalis/PostDetails";
 import {  ToastContainer  } from "react-toastify"; 
 import Category from "./pages/category/Category";
+import Profile from "./pages/profile/Profile";
 export default function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} /> 
+          <Route path="/profile/:id" element={<Profile />} /> 
           <Route path="posts">
               <Route index element={<Posts />} />
               <Route path="create-post" element={<CreatePost />} />
