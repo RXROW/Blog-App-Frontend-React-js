@@ -8,6 +8,7 @@ import CommentList from "../../components/comments/CommentList";
 import Swal from 'sweetalert2'
 import UpdatePostModul from "./UpdatePostModul";
 const PostDetails = () => {
+ 
   const [file ,setFile] =  useState(null);
   const [updatePost ,setUpdatePost] =  useState(false);
   useEffect(()=>{
