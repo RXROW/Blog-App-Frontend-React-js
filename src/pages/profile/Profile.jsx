@@ -6,9 +6,11 @@ import {posts} from '../../dummyData';
 import {toast  } from "react-toastify"
 import { useEffect } from 'react';
 import Swal from 'sweetalert2'
+import UpdateProfileModal from './UpdateProfileModal';
 
 const Profile = () => {
   const [file, setFile] = useState(null);
+  const [updateProfile, setUpdateProfile] = useState(false);
   useEffect(()=>{
     window.scrollTo(0,0)
     },[])
@@ -71,7 +73,7 @@ const deletePostHandler = ()=>{
           <strong>Date joined: </strong>
           <span>Fri Nov 04 2024</span>
         </div>
-        <button className='profile-update-btn'>
+        <button onClick={()=>setUpdateProfile(true)} className='profile-update-btn'>
           <i className="bi bi-file-person-fill"></i>
           Update Profile
         </button>
@@ -83,6 +85,7 @@ const deletePostHandler = ()=>{
       <button onClick={deletePostHandler} className='delete-account-btn'>
         Delete Your Account
       </button>
+      {updateProfile && <UpdateProfileModal setUpdateProfil={setUpdateProfile}/>}
 
     </section>
   

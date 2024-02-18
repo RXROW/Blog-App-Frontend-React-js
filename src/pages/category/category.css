@@ -14,3 +14,10 @@
   margin-right:  auto;
   margin-left: auto;
 }
+ /* Media Quries */
+ 
+ @media (max-width:520px) {
+  .category-title{
+    font-size: 22px;
+  }
+ }
