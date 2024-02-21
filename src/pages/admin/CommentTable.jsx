@@ -1,6 +1,6 @@
 import React from 'react';
 import AdminSidbar from './AdminSidbar';
-import { Link } from 'react-router-dom';
+ 
 import './admin-taple.css'
 import Swal from 'sweetalert2'
 
