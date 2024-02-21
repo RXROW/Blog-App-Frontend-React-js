@@ -9,7 +9,7 @@ const AdminMain = () => {
           <h5 className="admin-main-title">Users</h5>
           <div className="admin-card-count">20  </div>
           <div className="admin-card-link-wrapper">
-            <Link to="/admin-dashboard/users-table"
+            <Link to="/admin-dashbourd/users-table"
             className='admain-card-link'> See All Users </Link>
             <div className="admin-card-icon">
             <i className="bi bi-person"></i>
@@ -21,7 +21,7 @@ const AdminMain = () => {
           <h5 className="admin-main-title">Posts</h5>
           <div className="admin-card-count">120  </div>
           <div className="admin-card-link-wrapper">
-            <Link to="/admin-dashboard/posts-table"
+            <Link to="/admin-dashbourd/posts-table"
             className='admain-card-link'> See All Posts </Link>
             <div className="admin-card-icon">
             <i className="bi bi-file-post"></i>
@@ -33,7 +33,7 @@ const AdminMain = () => {
           <h5 className="admin-main-title">Categories</h5>
           <div className="admin-card-count">4  </div>
           <div className="admin-card-link-wrapper">
-            <Link to="/admin-dashboard/categories-table"
+            <Link to="/admin-dashbourd/categories-table"
             className='admain-card-link'> See All Categories </Link>
             <div className="admin-card-icon">
             <i className="bi bi-tag"></i>
@@ -45,7 +45,7 @@ const AdminMain = () => {
           <h5 className="admin-main-title">Comments</h5>
           <div className="admin-card-count">10  </div>
           <div className="admin-card-link-wrapper">
-            <Link to="/admin-dashboard/comments-table"
+            <Link to="/admin-dashbourd/comments-table"
             className='admain-card-link'> See All Comments </Link>
             <div className="admin-card-icon">
             <i className="bi bi-chat-left-text"></i>

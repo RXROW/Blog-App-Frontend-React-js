@@ -33,7 +33,6 @@
 }
 .sidebar-link:hover{
   background-color: var(--dark-color);
- 
   color: var(--white-secondary-color);
   transform: scale(.9);
 }

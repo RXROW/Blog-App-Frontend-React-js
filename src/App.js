@@ -11,6 +11,13 @@ import PostDetails from "./pages/post-detalis/PostDetails";
 import {  ToastContainer  } from "react-toastify"; 
 import Category from "./pages/category/Category";
 import Profile from "./pages/profile/Profile";
+import UsersTable from "./pages/admin/UsersTable";
+import PostsTable from "./pages/admin/PostsTable";
+import CategoriesTable from "./pages/admin/CategoriesTable";
+import CommentTable from "./pages/admin/CommentTable";
+import ForgotPassword from "./pages/Forms/ForgotPassword";
+import ResetPassword from "./pages/Forms/ResetPassword";
+import NotFound from "./pages/not-found/NotFound";
 export default function App() {
   return (
     <div className="App">
@@ -21,14 +28,24 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} /> 
+          <Route path="/forgot-password" element={<ForgotPassword />} /> 
+          <Route path="/reset-password" element={<ResetPassword />} /> 
           <Route path="/profile/:id" element={<Profile />} /> 
+
           <Route path="posts">
               <Route index element={<Posts />} />
               <Route path="create-post" element={<CreatePost />} />
               <Route path="details/:id" element={<PostDetails />} />
               <Route path="categories/:category" element={<Category />} />
           </Route>
-          <Route path="/admin-dashbourd" element={<AdminDashbourd />} />
+          <Route path="admin-dashbourd">
+             <Route index element={<AdminDashbourd />} />
+             <Route path="users-table" element={<UsersTable />} />
+             <Route path="posts-table" element={<PostsTable />} />
+             <Route path="categories-table" element={<CategoriesTable />} />
+             <Route path="comments-table" element={<CommentTable />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer/>
       </BrowserRouter>
