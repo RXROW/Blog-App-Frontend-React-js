@@ -1,4 +1,5 @@
 .from-container{
+  margin-top: 100px;
 width: 100%;
 min-height: calc( 100vh - 110px );
 display: flex;
