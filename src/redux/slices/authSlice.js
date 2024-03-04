@@ -11,6 +11,13 @@ const authSlice= createSlice({
     },
     Logout(state ){
       state.user=null;
+    },
+    setUserPhoto(state,action ){
+     state.user.profilePoto = action.payload;
+    },
+    setUsername(state,action ){
+     state.user.username = action.payload;
+
     }
   }
 });

@@ -7,18 +7,30 @@ import {toast  } from "react-toastify"
 import { useEffect } from 'react';
 import Swal from 'sweetalert2'
 import UpdateProfileModal from './UpdateProfileModal';
+import { useDispatch, useSelector } from 'react-redux'
+
+import { UplaodProfilePhoto, getUserProfile } from '../../redux/apiCalls/profileApiCall';
+import { useParams } from 'react-router-dom';
+
 
 const Profile = () => {
+const {profile}=useSelector(state=>state.profile)
+  const {id}= useParams()
+  const dispatch=useDispatch()
   const [file, setFile] = useState(null);
   const [updateProfile, setUpdateProfile] = useState(false);
   useEffect(()=>{
+    dispatch(getUserProfile(id))
     window.scrollTo(0,0)
-    },[])
+    },[id])
   /// Form Submit Handler 
 const formSubmitHandler = (e)=>{
   e.preventDefault();
   if(!file) return toast.warning("Thare Is No File ! ");
-  console.log("Image Uplaoded ! ")
+  const formData= new FormData();
+  formData.append("image",file);
+  dispatch(UplaodProfilePhoto(formData))
+ 
 }
 // Delete Account Handler 
 const deletePostHandler = ()=>{
@@ -44,7 +56,7 @@ const deletePostHandler = ()=>{
     <section className="profile">
       <div className="profile-header">
         <div className="profile-image-warpper">
-          <img src={file ? URL.createObjectURL(file):"/images/user-avatar.png"} 
+          <img src={file ? URL.createObjectURL(file):profile?.profilePhoto.url} 
            alt="profile" 
            className="profile-image" />
            <form onSubmit={formSubmitHandler} >
@@ -64,14 +76,13 @@ const deletePostHandler = ()=>{
              </form>
 
         </div>
-        <h1 className='profile-username'>Eslam Ahmed</h1>
+        <h1 className='profile-username'>{profile?.username}</h1>
         <p className="profile-bio">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           In et labore necessitatibus non.
+         {profile?.bio}
         </p>
         <div className="user-date-joined">
           <strong>Date joined: </strong>
-          <span>Fri Nov 04 2024</span>
+          <span>{new Date(profile?.createdAt).toDateString()}</span>
         </div>
         <button onClick={()=>setUpdateProfile(true)} className='profile-update-btn'>
           <i className="bi bi-file-person-fill"></i>
@@ -79,13 +90,13 @@ const deletePostHandler = ()=>{
         </button>
       </div>
       <div className="profile-posts-list">
-        <h2>Eslam Ahmed</h2>
+        <h2>{profile?.username} Posts</h2>
         <PostList posts={posts}/>
       </div>
       <button onClick={deletePostHandler} className='delete-account-btn'>
         Delete Your Account
       </button>
-      {updateProfile && <UpdateProfileModal setUpdateProfil={setUpdateProfile}/>}
+      {updateProfile && <UpdateProfileModal profile={profile} setUpdateProfil={setUpdateProfile}/>}
 
     </section>
   
