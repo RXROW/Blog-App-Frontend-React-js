@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import './comment-list.css'
 import Swal from 'sweetalert2'
 import UpdateCommentModul from "./UpdateCommentModul";
+import Moment from 'react-moment'
+import {  useSelector } from 'react-redux'
 
 // Delete Post Handler 
 const deletePostHandler = ()=>{
@@ -23,31 +25,46 @@ const deletePostHandler = ()=>{
     }
   });
 }
-const CommentList = () => {
+const CommentList = ({comments}) => {
+  const {post} = useSelector(state=>state.posts);
+  const {user} = useSelector(state=>state.auth);
+
+  
   const [updateComment,setUpdateComment]= useState(false);
   return (
     <div className="comment-list">
-      <h4 className="comment-list-count"> 2 Comments </h4>
-      {[1,2].map((comment) => (
-        <div key={comment} className="comment-item">
+      <h4 className="comment-list-count">{comments?.length} Comments </h4>
+      {comments?.map((comment) => (
+        <div key={comment?._id} className="comment-item">
           <div className="comment-item-info">
-            <div className="comment-item-username">Eslam Ahemd
+            <div className="comment-item-username">{comment?.username}
             </div>
             <div className="comment-item-time">
-              2 Hours ago
+              <Moment fromNow ago>
+              {comment?.createdAt}
+              </Moment>{" "} ago
+        
             </div>
 
           </div>
           <p className="comment-item-text">
-            Hello World I'm Eslam Ahmed
+         {comment?.text} 
 
           </p>
-          <div className="comment-item-icon-wrapper">
-          <i onClick={()=>setUpdateComment(true)} className="bi bi-pencil-square"></i>
-          <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
-          </div>
+          {
+    user?._id === comment?.user && (
+       
+      <div className="comment-item-icon-wrapper">
+
+      <i onClick={()=>setUpdateComment(true)} className="bi bi-pencil-square"></i>
+      <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
+      </div>
+    )
+  }
         </div>
       ))}
+
+
       {updateComment && <UpdateCommentModul setUpdateComment={setUpdateComment}/>}
     </div>
   );

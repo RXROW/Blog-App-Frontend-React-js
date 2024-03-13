@@ -28,6 +28,7 @@
   max-height: 200px;
  
   margin-bottom: 15px;
+  overflow: hidden;
 
 }
 .post-item-image{

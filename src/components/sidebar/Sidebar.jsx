@@ -1,7 +1,16 @@
 import React from 'react';
 import './sidebar.css'
 import { Link } from 'react-router-dom';
-const Sidebar = ({categories}) => {
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { fetchCategories } from '../../redux/apiCalls/categoryApiCall';
+const Sidebar = () => {
+ const dispatch=useDispatch();
+ const {categories} = useSelector(state => state.category );
+ useEffect(()=>{
+  dispatch(fetchCategories())
+ },[])
+
   return (
     <div className='sidebar'>
       <h4 className="sidebar-title"> Categories</h4>

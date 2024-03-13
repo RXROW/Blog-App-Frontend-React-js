@@ -1,7 +1,6 @@
 import PostList from '../../components/posts/PostList';
 import Sidbar from '../../components/sidebar/Sidebar'
 import './posts-page.css'
-import { categories} from '../../dummyData'
 import Pagenation from '../../components/pagenation/Pagenation';
 import { useEffect , useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,7 +26,7 @@ const Posts = () => {
     <>
     <section className="post-page">
       <PostList posts={posts}/>
-      <Sidbar categories={categories}/>
+      <Sidbar />
     </section>
     <Pagenation Pages={Pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
 

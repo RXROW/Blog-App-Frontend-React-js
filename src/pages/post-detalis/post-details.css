@@ -5,6 +5,9 @@
   padding: 20px;
    
 }
+.red{
+  background-color: red !important;
+}
  
 .post-details-image-wrapper {
   height: 400px;

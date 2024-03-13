@@ -1,7 +1,24 @@
 import React, { useState } from 'react';
 import './update-post.css'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify';
-const UpdatePostModul = ({setUpdatePost ,post}) => {
+import { ubdatePost } from '../../redux/apiCalls/postApiCall';
+import { fetchCategories } from '../../redux/apiCalls/categoryApiCall';
+import  {  useEffect } from "react";
+
+const UpdatePostModul = ({setUpdatePost , post}) => {
+
+
+  const {categories} = useSelector(state => state.category );
+  useEffect(()=>{
+   dispatch(fetchCategories())
+  },[])
+
+
+
+  const dispatch=useDispatch();
+ 
+   
     const [title,setTitle]=useState(post.title);
     const [description,setDescription]=useState(post.description);
     const [category,setCategory]=useState(post.category);
@@ -12,7 +29,8 @@ const UpdatePostModul = ({setUpdatePost ,post}) => {
       if(title.trim() === "") return  toast.error("Post Title is required"); 
       if(category.trim() === "") return toast.error("Post Category is required"); 
       if(description.trim() === "") return  toast.error("Post Description is required"); 
-      console.log({title,description,category});
+     dispatch(ubdatePost({title,category,description},post?._id));
+     setUpdatePost(false);
 
     }
   return (
@@ -37,9 +55,9 @@ const UpdatePostModul = ({setUpdatePost ,post}) => {
           <option disabled value="">
             Select All Category
           </option>
-          <option value="programming">programming</option>
-          <option value="travlling">Travlling</option>
-          <option value="frontend">frontend</option>
+          {categories.map(category=> 
+          <option key={category._id} value={category.title}>{category.title}</option> )}
+         
         </select>
          <textarea
           className='update-post-textarea' 

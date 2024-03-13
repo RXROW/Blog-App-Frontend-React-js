@@ -30,21 +30,6 @@ const Postitem = ({ post }) => {
         </div>
         <p className="post-item-description">
           {post?.description}
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quasi
-          commodi. Molestiae natus numquam, nobis eligendi incidunt ipsa
-          officiis quis corrupti distinctio porro tempora aliquid? Veritatis qui
-          animi blanditiis tempore. Lorem ipsum dolor sit, amet consectetur
-          adipisicing elit. Ex magni consectetur, aspernatur natus veniam
-          ratione porro laborum amet minus nemo, aperiam asperiores recusandae
-          distinctio iusto possimus fugit nulla molestias voluptates
-          reprehenderit! Architecto quos perferendis deserunt in iste, expedita
-          obcaecati itaque molestiae fugiat odio voluptatem alias ab? Labore,
-          ducimus voluptatum iste sequi hic laudantium ipsam animi culpa fugit
-          harum saepe ex magni recusandae odio excepturi aperiam molestias
-          reiciendis minus blanditiis quos ab, obcaecati facere cum. Cum
-          temporibus earum cumque blanditiis sequi. Minima reiciendis eius saepe
-          vero exercitationem excepturi sint nihil unde at, quidem provident
-          doloremque veniam quo! Quasi accusantium vel dicta!
         </p>
         <Link className="post-item-link" to={`/posts/details/${post?._id}`}>
           Read More...

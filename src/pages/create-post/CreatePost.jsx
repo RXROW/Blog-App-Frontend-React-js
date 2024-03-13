@@ -1,35 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./CreatePost.css";
-import {toast  } from "react-toastify"
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { createPost } from "../../redux/apiCalls/postApiCall";
+import { BeatLoader } from "react-spinners";
+import { fetchCategories } from "../../redux/apiCalls/categoryApiCall";
+
 const CreatePost = () => {
+  const {categories} = useSelector(state => state.category );
+ 
+  const dispatch = useDispatch();
+  const { loading, isPostCreated } = useSelector(state => state.posts);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setcategory] = useState("");
+  const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
-/// Form Submit Handler 
-const formSubmitHandler = (e)=>{
-  e.preventDefault();
-  if(title.trim() === "") return  toast.error("Post Title is required"); 
-  if(category.trim() === "") return toast.error("Post Category is required"); 
-  if(description.trim() === "") return  toast.error("Post Description is required"); 
-  if(!file) return toast.error("Post Image is required"); 
-  // const formData=new formData();
-  // formData.append("image", file);
-  // formData.append("title", title);
-  // formData.append("description", description);
-  // formData.append("category", category);
 
-  /// @ TODO - send to server 
+  /// Form Submit Handler 
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (title.trim() === "") return toast.error("Post Title is required");
+    if (category.trim() === "") return toast.error("Post Category is required");
+    if (description.trim() === "") return toast.error("Post Description is required");
+    if (!file) return toast.error("Post Image is required");
 
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("category", category);
+
+    dispatch(createPost(formData));
+  };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isPostCreated) {
+      navigate("/");
+    }
+  }, [isPostCreated, navigate]);
  
-
-  console.log({title,description,category,file})
-}
-
-
+ useEffect(()=>{
+  dispatch(fetchCategories())
+ },[])
   return (
     <section className="create-post">
- 
       <h1 className="create-post-title">Create New Post</h1>
       <form onSubmit={formSubmitHandler} className="create-post-form">
         <input
@@ -41,15 +58,15 @@ const formSubmitHandler = (e)=>{
         />
         <select
           value={category}
-          onChange={(e) => setcategory(e.target.value)}
+          onChange={(e) => setCategory(e.target.value)}
           className="create-post-input"
         >
           <option disabled value="">
             Select All Category
           </option>
-          <option value="programming">programming</option>
-          <option value="backend">backend</option>
-          <option value="frontend">frontend</option>
+          {categories.map(category=> 
+          <option key={category._id} value={category.title}>{category.title}</option> )}
+     
         </select>
         <textarea
           value={description}
@@ -65,8 +82,9 @@ const formSubmitHandler = (e)=>{
           id="file"
           className="create-post-upload"
         />
-        <button type="submit" className="create-post-btn">
-          Create
+        <button type="submit" className="create-post-btn" disabled={loading}>
+          {loading ? (
+<BeatLoader color="#ffffff" />) : "Create"}
         </button>
       </form>
     </section>
