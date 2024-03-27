@@ -1,15 +1,21 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import AdminSidbar from './AdminSidbar';
 import { Link } from 'react-router-dom';
 import './admin-taple.css'
 import Swal from 'sweetalert2'
-import { posts } from '../../dummyData';
-
-
+ 
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPosts  , deletePost} from '../../redux/apiCalls/postApiCall';
  
 const PostsTable = () => {
+  const dispatch = useDispatch();
+  const {posts} = useSelector(state => state.posts);
+  useEffect(() => {
+    dispatch(getAllPosts());
+  }, []); 
+
   // Delete Post Handler 
-const deletePostHandler = ()=>{
+const deletePostHandler = (postId)=>{
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -25,6 +31,7 @@ const deletePostHandler = ()=>{
         text: "Your file has been deleted.",
         icon: "success"
       });
+      dispatch(deletePost(postId))
     }
   });
 }
@@ -49,7 +56,7 @@ const deletePostHandler = ()=>{
                 <td>{index + 1}</td>
                 <td> 
                   <div className="table-iamge">
-                    <img src="\images\user-avatar.png" 
+                    <img src={item.user?.profilePhoto?.url}
                     className='table-user-image' alt="" />
                     <span className='username'>{item.user.username}</span>
                   </div>
@@ -62,7 +69,7 @@ const deletePostHandler = ()=>{
                           View Post
                       </Link>
                     </button>
-                    <button onClick={deletePostHandler}>
+                    <button onClick={()=>deletePostHandler(item._id)}>
                       Delete Post
                     </button>
 

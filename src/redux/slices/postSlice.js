@@ -1,77 +1,62 @@
-import {createSlice} from "@reduxjs/toolkit"
-const postSlice= createSlice({
-  name:"post",
-  initialState:{
-    posts:[],
-    postsCount:null,
-    postsCat:[],
-    loading:false,
-    isPostCreated:false,
-    post:null,
+import { createSlice } from "@reduxjs/toolkit";
 
-    
-
- 
-   
+const postSlice = createSlice({
+  name: "post",
+  initialState: {
+    posts: [],
+    postsCount: null,
+    postsCat: [],
+    loading: false,
+    isPostCreated: false,
+    post: null
   },
-  reducers:{
-    setPosts(state , actions){
-      state.posts=actions.payload;
+  reducers: {
+    setPosts: (state, action) => {
+      state.posts = action.payload;
     },
-    setPostsCount(state , actions){
-      state.postsCount=actions.payload;
+    setPostsCount: (state, action) => {
+      state.postsCount = action.payload;
     },
-    setPostsCat(state , actions){
-      state.postsCat=actions.payload;
+    setPostsCat: (state, action) => {
+      state.postsCat = action.payload;
     },
-    setLoading(state){
-      state.loading=true;
-    },  
-    clearLoading(state){
-      state.loading=false;
+    setLoading: (state) => {
+      state.loading = true;
     },
-    setIsPostCreated(state){
-      state.isPostCreated=true;
-      state.loading=false;
-
+    clearLoading: (state) => {
+      state.loading = false;
     },
-    clearIsPostCreated(state){
-      state.isPostCreated=false;
+    setIsPostCreated: (state) => {
+      state.isPostCreated = true;
+      state.loading = false;
     },
-    setPost(state,actions){
-      state.post=actions.payload;
+    clearIsPostCreated: (state) => {
+      state.isPostCreated = false;
     },
-    setLike(state,actions){
-    state.post.likes=actions.payload.likes;
+    setPost: (state, action) => {
+      state.post = action.payload;
     },
-    deletePost(state,actions){
-    state.posts=actions.posts.filter(p=>p._id !== actions.payload);
+    setLike: (state, action) => {
+      state.post.likes = action.payload.likes;
     },
-    addCommentToPost(state,actions){
-      state.post.comments.push(actions.payload)
-
+    deletePost: (state, action) => {
+      state.posts = state.posts.filter((p) => p._id !== action.payload);
     },
-    updateCommentPost(state,actions){
-      state.post.comments = state.post.comments.map(comment=>comment._id === actions.payload._id  ? actions.payload : comment)
-
+    addCommentToPost: (state, action) => {
+      state.post.comments.push(action.payload);
+    },
+    updateCommentPost: (state, action) => {
+      state.post.comments = state.post.comments.map((comment) =>
+        comment._id === action.payload._id ? action.payload : comment
+      );
+    },
+    deleteCommentPost: (state, action) => {
+      const comment = state.post.comments.find((c) => c._id === action.payload);
+      const commentIndex = state.post.comments.indexOf(comment);
+      state.post.comments.splice(commentIndex, 1);
     }
-    ,
-    deleteCommentPost(state,actions){
-        const comment = state.post.comments.find(c=>c._id === actions.payload);
-        const commentIndex= state.post.comments.indexOf(comment)
-        state.post.comments.splice(commentIndex,1)
-    }
-
-
-
-
-
- 
- 
- 
   }
 });
 
-const postReducer=postSlice.reducer;
-const postAction=postSlice.actions;
-export {postReducer,postAction}
+const { reducer: postReducer, actions: postAction } = postSlice;
+export { postReducer, postAction };

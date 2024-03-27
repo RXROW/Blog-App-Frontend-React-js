@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AdminSidbar from './AdminSidbar';
  
 import './admin-taple.css'
 import Swal from 'sweetalert2'
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteCommment, fetchAllComments } from '../../redux/apiCalls/commetApiCall';
 
  
  
 const CommentTable = () => {
+
+  const dispatch = useDispatch();
+  const {comments} = useSelector(state => state.comment);
+
+
+  
+  useEffect(() => {
+    dispatch(fetchAllComments());
+     
+  }, []);
+
+
+
   // Delete Comment Handler 
-const deleteCommentHandler = ()=>{
+const deleteCommentHandler = (commentId)=>{
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -24,6 +39,7 @@ const deleteCommentHandler = ()=>{
         text: "Your file has been deleted.",
         icon: "success"
       });
+      dispatch(deleteCommment(commentId))
     }
   });
 }
@@ -43,21 +59,21 @@ const deleteCommentHandler = ()=>{
             </tr>
           </thead>
           <tbody>
-            {[1,2,3,4].map(item=>(
-              <tr key={item}>
-                <td>{item}</td>
+            {comments.map((item ,index  )=>(
+              <tr key={item._id}>
+                <td>{index + 1}</td>
                 <td> 
                   <div className="table-iamge">
-                    <img src="\images\user-avatar.png" 
+                    <img src={item.user?.profilePhoto?.url}
                     className='table-user-image' alt="" />
-                    <span className='username'>Eslam Ahmed</span>
+                    <span className='username'>{item.user?.username}</span>
                   </div>
                 </td>
-                <td>This Comment Good</td>
+                <td>{item.text}</td>
                 <td>
                   <div className="table-btn-group">
                  
-                    <button onClick={deleteCommentHandler}>
+                    <button onClick={()=>deleteCommentHandler(item._id)}>
                       Delete Comment
                     </button>
 

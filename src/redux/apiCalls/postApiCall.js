@@ -18,6 +18,22 @@ import {toast} from 'react-toastify'
 
   }
 };
+// Get All  Posts  
+
+export  function getAllPosts(pageNumber) {
+  return async(dispatch)=>{
+   try {
+     const {data} =await request.get(`/api/posts`)
+     dispatch(postAction.setPosts(data))
+
+   } catch (error) {
+     toast.error(error.response.data.message);
+    console.log(error)
+     
+   }
+
+ }
+};
  // Get Posts Based Count
 
  export  function getPostCount(pageNumber) {
@@ -25,7 +41,7 @@ import {toast} from 'react-toastify'
    try {
      const {data} =await request.get(`/api/posts/count`)
      dispatch(postAction.setPostsCount(data))
-
+ 
    } catch (error) {
      toast.error(error.response.data.message);
     console.log(error)
