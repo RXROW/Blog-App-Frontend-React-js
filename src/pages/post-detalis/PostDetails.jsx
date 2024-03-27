@@ -113,7 +113,9 @@ const deletePostHandler = ()=>{
         }
       
       </div>
-      <AddComment/>
+      {
+        user ? <AddComment postId={post?._id}/>:<p className="post-detials-info-write">To Write a comment you should login first</p>
+      }
       <CommentList comments={post?.comments}/>
         {updatePost && <UpdatePostModul post={post} setUpdatePost={setUpdatePost}/> }    
        

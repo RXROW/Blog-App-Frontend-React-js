@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AdminSidbar from './AdminSidbar';
  
 import './admin-taple.css'
 import Swal from 'sweetalert2'
- 
+import { useDispatch , useSelector } from 'react-redux';
+import {deleteCategory, fetchCategories} from "../../redux/apiCalls/categoryApiCall"
+
   
 
  
 const CategoriesTable = () => {
+  const dispatch =useDispatch();
+  const {categories} = useSelector(state => state.category)
+  useEffect(() => {
+    dispatch( fetchCategories());
+       
+    }, [ ]);
   // Delete Post Handler 
-const deleteCategoryHandler = ()=>{
+const deleteCategoryHandler = (categoruId)=>{
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -25,6 +33,7 @@ const deleteCategoryHandler = ()=>{
         text: "Your file has been deleted.",
         icon: "success"
       });
+      dispatch(deleteCategory(categoruId))
     }
   });
 }
@@ -43,17 +52,17 @@ const deleteCategoryHandler = ()=>{
             </tr>
           </thead>
           <tbody>
-            {[1,2,3,4,5].map((item)=>(
-              <tr key={item}>
-                <td>{item}</td>
+            {categories.map((item , index)=>(
+              <tr key={item._id}>
+                <td>{index + 1}</td>
                 <td> 
-                 <b>Programming</b>
+                 <b>{item.title}</b>
                 </td>
                
                 <td>
                   <div className="table-btn-group">
                
-                    <button onClick={deleteCategoryHandler}>
+                    <button onClick={()=>deleteCategoryHandler(item._id)}>
                       Delete Category
                     </button>
 

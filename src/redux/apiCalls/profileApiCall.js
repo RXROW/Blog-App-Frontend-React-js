@@ -73,3 +73,73 @@ export  function updateProfile(userId,profile) {
  }
 };
 
+
+//  Delete Profile 
+export  function deleteProfile(userId) {
+  return async(dispatch , getState)=>{
+   try {
+  dispatch(ProfileAction.setLoading())
+     const {data} =await request.delete(`/api/users/profile/${userId}`, {
+      headers:{
+        Authorization:"Bearer " + getState().auth.user.token,
+      }
+     });
+
+     dispatch(ProfileAction.setIsProfileDeleted());
+     toast.success(data?.massage);
+     setTimeout(()=>dispatch(ProfileAction.clearIsProfileDeleted(), 2000))
+   
+
+   } catch (error) {
+     toast.error(error.response.data.message);
+    console.log(error)
+    dispatch(ProfileAction.clearLoading())
+     
+   }
+
+ }
+};
+
+// (For Admin )
+
+// Get Users Count   
+export  function getUsersCount() {
+  return async(dispatch , getState)=>{
+   try {
+     const {data} =await request.get(`/api/users/count`, {
+      headers:{
+        Authorization:"Bearer " + getState().auth.user.token,
+      }
+     });
+
+     dispatch(ProfileAction.setUsersCount(data));
+      
+   } catch (error) {
+     toast.error(error.response.data.message);
+    console.log(error)
+      
+   }
+
+ }
+};
+
+// Get All Users      
+export  function getAllUsersProfiles() {
+  return async(dispatch , getState)=>{
+   try {
+     const {data} =await request.get(`/api/users/profile`, {
+      headers:{
+        Authorization:"Bearer " + getState().auth.user.token,
+      }
+     });
+
+     dispatch(ProfileAction.setProfiles(data));
+     
+   } catch (error) {
+     toast.error(error.response.data.message);
+    console.log(error)
+      
+   }
+
+ }
+};

@@ -3,17 +3,23 @@ import './update-comment.css'
 import { toast } from 'react-toastify';
  
 
+import { useDispatch    } from 'react-redux'
+import { updateComment } from '../../redux/apiCalls/commetApiCall';
 
  
-const UpdateCommentModul = ({setUpdateComment}) => {
-    const [text,setText]=useState("This Comment");
+const UpdateCommentModul = ({setUpdateComment , commentFormUpdate}) => {
+  const dispatch=useDispatch();
+
+
+    const [text,setText]=useState(commentFormUpdate?.text);
      
   
     // Form Submit Handler
     const formSubmitHandler=(e)=>{
       e.preventDefault();
       if(text.trim() === "") return  toast.error("Please Write Comment ! "); 
-      console.log({text});
+       dispatch(updateComment(commentFormUpdate?._id, {text} ));
+       setUpdateComment(false)
 
     }
   return (

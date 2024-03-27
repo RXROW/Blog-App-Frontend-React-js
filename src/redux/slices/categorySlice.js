@@ -11,7 +11,15 @@ const categorySlice= createSlice({
   reducers:{
     setCategories(state , actions){
       state.categories=actions.payload;
-    },
+    },   
+     addCategory(state , actions){
+      state.categories.push( actions.payload);
+    },   
+    deleteCategory(state , actions){
+      state.categories= state.categories.filter(c=>c._id !== actions.payload) 
+
+   },
+
  
  
  

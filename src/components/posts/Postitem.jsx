@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./posts.css";
-const Postitem = ({ post }) => {
+const Postitem = ({ post  ,username , userId}) => {
+  const profileLinke = userId ? `/profile/${userId}`:`/profile/${post?.user._id}`; 
   return (
     <div className="post-item">
       <div className="post-item-image-wrapper">
@@ -11,8 +12,8 @@ const Postitem = ({ post }) => {
         <div className="post-item-info">
           <div className="post-item-author">
             <strong>Author: </strong>
-            <Link className="post-item-username" to={`/profile/${post?.user._id}`}>
-              {post?.user.username}
+            <Link className="post-item-username" to={profileLinke}>
+              {username ?   username : post?.user.username}
             </Link>
           </div>
           <div className="post-item-date">

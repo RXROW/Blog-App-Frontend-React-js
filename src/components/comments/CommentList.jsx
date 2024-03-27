@@ -3,10 +3,27 @@ import './comment-list.css'
 import Swal from 'sweetalert2'
 import UpdateCommentModul from "./UpdateCommentModul";
 import Moment from 'react-moment'
-import {  useSelector } from 'react-redux'
+import {  useSelector ,useDispatch } from 'react-redux'
+import { deleteCommment } from "../../redux/apiCalls/commetApiCall";
 
-// Delete Post Handler 
-const deletePostHandler = ()=>{
+
+const CommentList = ({comments}) => {
+  const dispatch=useDispatch();
+
+  const {post} = useSelector(state=>state.posts);
+  const {user} = useSelector(state=>state.auth);
+
+  
+  const [updateComment,setUpdateComment]= useState(false);
+  const [commentFormUpdate,setCommentFormUpdate]= useState(null);
+  // Update Comment Handler 
+  const  updateCommentHandler = (comment)=>{
+    setCommentFormUpdate(comment)
+    setUpdateComment(true)
+
+  } 
+  // Delete Comment Handler 
+const deleteCommentHandler = (commentId)=>{
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -22,15 +39,10 @@ const deletePostHandler = ()=>{
         text: "Your file has been deleted.",
         icon: "success"
       });
+      dispatch(deleteCommment(commentId))
     }
   });
 }
-const CommentList = ({comments}) => {
-  const {post} = useSelector(state=>state.posts);
-  const {user} = useSelector(state=>state.auth);
-
-  
-  const [updateComment,setUpdateComment]= useState(false);
   return (
     <div className="comment-list">
       <h4 className="comment-list-count">{comments?.length} Comments </h4>
@@ -56,8 +68,8 @@ const CommentList = ({comments}) => {
        
       <div className="comment-item-icon-wrapper">
 
-      <i onClick={()=>setUpdateComment(true)} className="bi bi-pencil-square"></i>
-      <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
+      <i onClick={()=>updateCommentHandler(comment)} className="bi bi-pencil-square"></i>
+      <i onClick={()=>deleteCommentHandler(comment?._id)} className="bi bi-trash-fill"></i>
       </div>
     )
   }
@@ -65,7 +77,7 @@ const CommentList = ({comments}) => {
       ))}
 
 
-      {updateComment && <UpdateCommentModul setUpdateComment={setUpdateComment}/>}
+      {updateComment && <UpdateCommentModul commentFormUpdate={commentFormUpdate} setUpdateComment={setUpdateComment}/>}
     </div>
   );
 };

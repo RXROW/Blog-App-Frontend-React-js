@@ -46,7 +46,22 @@ const postSlice= createSlice({
     },
     deletePost(state,actions){
     state.posts=actions.posts.filter(p=>p._id !== actions.payload);
+    },
+    addCommentToPost(state,actions){
+      state.post.comments.push(actions.payload)
+
+    },
+    updateCommentPost(state,actions){
+      state.post.comments = state.post.comments.map(comment=>comment._id === actions.payload._id  ? actions.payload : comment)
+
     }
+    ,
+    deleteCommentPost(state,actions){
+        const comment = state.post.comments.find(c=>c._id === actions.payload);
+        const commentIndex= state.post.comments.indexOf(comment)
+        state.post.comments.splice(commentIndex,1)
+    }
+
 
 
 

@@ -1,14 +1,22 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import AdminSidbar from './AdminSidbar';
 import { Link } from 'react-router-dom';
 import './admin-taple.css'
 import Swal from 'sweetalert2'
 
+import { useDispatch ,useSelector } from 'react-redux';
 
- 
+import { deleteProfile, getAllUsersProfiles } from '../../redux/apiCalls/profileApiCall';
+
 const UsersTable = () => {
+  const dispatch =useDispatch();
+ const {profiles ,isProfileDeleted} = useSelector(state=>state.profile);
+useEffect(() => {
+ dispatch(getAllUsersProfiles());
+ 
+}, [isProfileDeleted]);
   // Delete User Handler 
-const deleteUserHandler = ()=>{
+const deleteUserHandler = (userId)=>{
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -24,6 +32,7 @@ const deleteUserHandler = ()=>{
         text: "Your file has been deleted.",
         icon: "success"
       });
+      dispatch(deleteProfile(userId))
     }
   });
 }
@@ -43,25 +52,25 @@ const deleteUserHandler = ()=>{
             </tr>
           </thead>
           <tbody>
-            {[1,2,3,4,5,6,7,8,9,10].map(item=>(
-              <tr key={item}>
-                <td>{item}</td>
+            {profiles.map((item ,index)=>(
+              <tr key={item._id}>
+                <td>{index + 1}</td>
                 <td> 
                   <div className="table-iamge">
-                    <img src="\images\user-avatar.png" 
+                    <img src={item?.profilePhoto?.url}
                     className='table-user-image' alt="" />
-                    <span className='username'>Eslam Ahmed</span>
+                    <span className='username'>{item.username}</span>
                   </div>
                 </td>
-                <td>Eslamahmed@gmail.com</td>
+                <td>{item.email}</td>
                 <td>
                   <div className="table-btn-group">
                     <button>
-                      <Link  to={`/profile/1`}>
+                      <Link  to={`/profile/${item._id}`}>
                           View Profile
                       </Link>
                     </button>
-                    <button onClick={deleteUserHandler}>
+                    <button onClick={()=>deleteUserHandler(item._id)}>
                       Delete User
                     </button>
 

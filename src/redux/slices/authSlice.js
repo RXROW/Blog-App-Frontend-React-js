@@ -3,7 +3,9 @@ const authSlice= createSlice({
   name:"auth",
   initialState:{
     user:localStorage.getItem("userInfo") ?
-    JSON.parse(localStorage.getItem("userInfo") ) : null
+    JSON.parse(localStorage.getItem("userInfo") ) : null,
+    registerMessage: null 
+
   },
   reducers:{
     Login(state ,action){
@@ -11,13 +13,15 @@ const authSlice= createSlice({
     },
     Logout(state ){
       state.user=null;
-    },
-    setUserPhoto(state,action ){
+    },setUserPhoto(state,action ){
      state.user.profilePoto = action.payload;
     },
     setUsername(state,action ){
      state.user.username = action.payload;
 
+    },
+    register(state, action){
+      state.registerMessage= action.payload;
     }
   }
 });

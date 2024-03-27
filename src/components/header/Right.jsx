@@ -24,7 +24,7 @@ const logoutHandler=()=>{
               {user?.username}
             </span>
             <img
-              src={user?.profilePhoto.url}
+              src={user?.profilePhoto?.url}
               alt=""
               className="header-right-user-photo"
             />
